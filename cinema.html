@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        background-image: linear-gradient(
+          to right,
+          red,
+          orange,
+          yellow,
+          green,
+          blue,
+          indigo,
+          violet
+        );
+        width: 100%;
+        height: 100dvh;
+        font-family: "Comic Sans MS", "Comic Sans", cursive;
+      }
+
+      main {
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+
+      div.pergunta_principal > p {
+        font-size: 36px;
+      }
+
+      .wrapper_resposta {
+        display: flex;
+        margin-top: 6%;
+        justify-content: space-evenly;
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 1px solid #fff;
+        width: 113px;
+        height: 53px;
+        background-color: chocolate;
+        border-radius: 5px;
+      }
+
+      .nao {
+        position: absolute;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="wrapper_pergunta">
+        <div class="pergunta_principal">
+          <p>Aceita ir no cinema comigo?</p>
+        </div>
+        <div class="wrapper_resposta">
+          <div class="sim btn">Sim</div>
+          <div class="nao btn">Não</div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const nao = document.querySelector(".nao");
+
+      function moveDiv(event) {
+        const mouse_x = event.clientX;
+        const mouse_y = event.clientY;
+        const nao_rect = nao.getBoundingClientRect();
+        const nao_center_x = nao_rect.left + nao_rect.width / 2;
+        const nao_center_y = nao_rect.top + nao_rect.height / 2;
+        const hipotenusa = Math.sqrt(
+          Math.pow(mouse_x - nao_center_x, 2) +
+            Math.pow(mouse_y - nao_center_y, 2)
+        );
+
+        if (hipotenusa < 200) {
+          let novo_x = Math.random() * (window.innerWidth - nao_rect.width);
+          let novo_y = Math.random() * (window.innerHeight - nao_rect.height);
+          novo_x -= 113;
+          novo_y -= 52;
+          nao.style.left = novo_x + "px";
+          nao.style.top = novo_y + "px";
+        }
+      }
+      document.addEventListener("mousemove", moveDiv);
+      document.querySelector(".sim").addEventListener("click", (e) => {
+        window.location.replace("https://www.youtube.com/watch?v=izGwDsrQ1eQ");
+      });
+    </script>
+  </body>
+</html>
